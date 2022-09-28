@@ -41,12 +41,12 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
 
         public bool InsertData(User_Registration_CRUD_Operations_Without_Entity_Framework user_registration)
         {
-            SqlCommand cmd = new SqlCommand("sp_insert", connection);
-            cmd.CommandType = CommandType.storedProcedure;
-            cmd.Parameters.AddWithValue("@id", user_registration.id);
-            cmd.Parameters.AddWithValue("@emailid", user_registration.emailid);
-            cmd.Parameters.AddWithValue("@password_of_user", user_registration.password_of_user);
-            cmd.Parameters.AddWithValue("@name_of_user", user_registration.name_of_user);
+            var command = new SqlCommand("sp_insert", connection);
+            command.CommandType = CommandType.storedProcedure;
+            command.Parameters.AddWithValue("@id", user_registration.id);
+            command.Parameters.AddWithValue("@emailid", user_registration.emailid);
+            command.Parameters.AddWithValue("@password_of_user", user_registration.password_of_user);
+            command.Parameters.AddWithValue("@name_of_user", user_registration.name_of_user);
             connection.open();
             i = cmd.ExecuteNonQuery();
             connection.close();
