@@ -1,0 +1,39 @@
+﻿@model User_Registration_CRUD_Operations_Without_Entity_Framework.Models.UserRegistrationModel
+
+@{
+    ViewBag.Title = "Details";
+
+}
+
+<h2>detail</h2>
+
+
+<div>
+
+    <h4> UserRegistrationModel
+        <hr/>
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model = model.emailid)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model = model.emailid)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model = model.password_of_user)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model = model.password_of_user)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model = model.name_of_user)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model = model.name_of_user )
+            </dd>
+        </dl>
+
+
+    </h4>
+</div>
