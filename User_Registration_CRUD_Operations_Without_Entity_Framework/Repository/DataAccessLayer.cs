@@ -17,11 +17,11 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
         public List<UserRegistrationModel>  GetDataList()
         {
             List<UserRegistrationModel> list_for_user_registration = new List<UserRegistrationModel>();
-            SqlCommand cmd = new SqlCommand("sp_select", connection);
-            cmd.CommandType = CommandType.storedProcedure;
-            DataTable data_table = new DataTable();
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            adp.Fill(data_table);
+            var  command= new SqlCommand("sp_select", connection);
+            command.CommandType = CommandType.storedProcedure;
+            var data_table = new DataTable();
+            var adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(data_table);
 
             foreach(DataRow dr in data_table.Rows)
             {
