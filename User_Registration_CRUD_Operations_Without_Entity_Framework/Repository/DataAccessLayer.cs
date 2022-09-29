@@ -11,9 +11,10 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
 {
     public class DataAccessLayer
     {
+        //connect with swapnil for reading connection string from appSettings.json
         public SqlConnection connection = new SqlConnection("conString");
 
-
+        //use var 
         public List<UserRegistrationModel>  GetDataList()
         {
             List<UserRegistrationModel> list_for_user_registration = new List<UserRegistrationModel>();
@@ -38,7 +39,7 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
             return list_for_user_registration;
         }
 
-
+        //it should be add data, also add, update should return back updated/added row from table
         public bool InsertData(User_Registration_CRUD_Operations_Without_Entity_Framework user_registration)
         {
             var command = new SqlCommand("sp_insert", connection);

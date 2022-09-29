@@ -14,19 +14,20 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
 {
     public class UserController : Controller
     {
+        /*it is a very major mistake I am not expecting you do this. this should be inside constructor, Also use meaningful names for variables and use var rather than tight coupling */
         DataAccessLayer dal = new DataAccessLayer();
         // GET: UserController1
         public ActionResult Index()
         {
             ModelState.Clear();
-
+            //first assign the value returned by GetDataList to some variable then return that variable, we might need to process data according to UI requirements
             return View(dal.GetDataList());
         }
 
         // GET: UserController1/Details/5
         public ActionResult Details(int id)
         {
-            return View(dal.GetDataList().Find(user_registration = user_registration.));
+            return View(dal.GetDataList().Find(user_registration = user_registration));
         }
 
         // GET: UserController1/Create
@@ -40,8 +41,10 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserRegistrationModel user_registration)
         {
+            //you have use logger, yu should log the error message also for exception
             try
             {
+                //first check here if model state is valid
                 if(dal.InsertData(user_registration))
                 {
                     ViewBag.Message = "Data Saved";

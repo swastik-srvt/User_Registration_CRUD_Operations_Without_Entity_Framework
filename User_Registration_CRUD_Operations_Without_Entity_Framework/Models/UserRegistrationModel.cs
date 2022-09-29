@@ -9,6 +9,8 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Models
 {
         public class UserRegistrationModel
         {
+        //property name should start with uppercase letter with no underscore
+        //you should use one more field for password confirmation at the time of registration
 
         [Required]
         [DisplayName("User ID")]
