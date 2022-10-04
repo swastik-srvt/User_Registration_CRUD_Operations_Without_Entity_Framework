@@ -91,7 +91,8 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         // GET: UserController1/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(_dataLayerFunction.GetDataList().Find(userRegistration => userRegistration.Id  = id))
+            var deletedUser  = View(_dataLayerFunction.GetDataList().Find(userRegistration => userRegistration.Id  = id))
+            return deletedUser;
         }
 
         // POST: UserController1/Delete/5
