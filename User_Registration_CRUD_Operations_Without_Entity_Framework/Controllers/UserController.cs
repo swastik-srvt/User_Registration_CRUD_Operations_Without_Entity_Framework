@@ -55,11 +55,14 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
             try
             {
                 //first check here if model state is valid
-                if(_dataLayerFunction.InsertData(userRegistration))
+                if(UserRegistrationModel.IsValid)
                 {
-                    ViewBag.Message = "Data Saved";
-                }
+                       if(_dataLayerFunction.InsertData(userRegistration))
+                     {
+                       ViewBag.Message = "Data Saved";
+                     }
                 return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
@@ -102,9 +105,12 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         {
             try
             {
-                if(_dataLayerFunction.DeleteData(userRegistration))
-                {
-                    ViewBag.Message("Data Deleted")
+              if(UserRegistrationModel.IsValid)
+              {
+                  if(_dataLayerFunction.DeleteData(userRegistration))
+                    {
+                        ViewBag.Message("Data Deleted")
+                     }
                 }
             }
             catch
