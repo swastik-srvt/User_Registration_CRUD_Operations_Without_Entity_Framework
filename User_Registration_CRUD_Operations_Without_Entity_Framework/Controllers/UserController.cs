@@ -36,8 +36,10 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         // GET: UserController1/Details/5
         public ActionResult Details(int id)
         {
+        if(UserRegistrationModel.IsValid){
             var  userRegistration = View(_dataLayerFunction.GetDataList().Find(userRegistration = userRegistration)); 
             return userRegistration;
+        }
         }
 
         // GET: UserController1/Create
