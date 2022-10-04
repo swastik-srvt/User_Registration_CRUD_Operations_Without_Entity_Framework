@@ -29,7 +29,7 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         {
             ModelState.Clear();
             //first assign the value returned by GetDataList to some variable then return that variable, we might need to process data according to UI requirements
-            var DataList =  View(dal.GetDataList());
+            var DataList =  View(_dataLayerFunction.GetDataList());
             return DataList;
         }
 
