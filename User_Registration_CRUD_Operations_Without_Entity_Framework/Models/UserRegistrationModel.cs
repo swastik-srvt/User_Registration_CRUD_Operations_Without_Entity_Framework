@@ -14,17 +14,33 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Models
 
         [Required]
         [DisplayName("User ID")]
-        public int id { get; set; }
+        public int Id { get; set; }
+                
+                
 
-        [Required]
+        [Required(ErrorMessage = "Enter email")]
+        [RegularExpression = ("^[a-zA-Z]+@+." , ErrorMessage = "Please Enter a Valid email ")]
         [DisplayName("Email ID")]
-        public string emailid    { get; set; }
-        [Required]
+        public string EmailId    { get; set; }
+                
+                
+                
+        [Required(ErrorMessage = "Enter Password")]
+        [RegularExpression = ("^[a-zA-Z]+$+@+_" , ErrorMessage = "Please Enter a Valid Password")]
         [DisplayName("User Password")]
-        public string password_of_user { get; set; }
-        [Required]
+        public string PasswordOfUser { get; set; }
+                
+        [Required(ErrorMessage = "Enter Password Again")]
+        [RegularExpression = ("^[a-zA-Z]+$+@+_" , ErrorMessage = "Please Enter The Same Password")]
+        [DisplayName("Confirm Password")]
+        public string ConfirmPasswordOfUser { get; set;   }  
+                
+                
+                
+        [Required(ErrorMessage = "Enter Name")]
+        [RegularExpression = ("^[a-zA-Z]+$" , ErrorMessage = "Please Enter a Valid Name ")]
         [DisplayName("User Name")]
-        public string name_of_user { get; set; }
+        public string NameOfUser { get; set; }
 
 
 
