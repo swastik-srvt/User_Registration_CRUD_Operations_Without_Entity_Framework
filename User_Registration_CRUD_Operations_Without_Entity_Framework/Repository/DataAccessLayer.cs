@@ -71,28 +71,6 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
 
         }
         
-         public List<UserRegistrationModel>  GetDataList()
-        {
-            var ListForUserRegistration = new List<UserRegistrationModel>();
-            var  command= new SqlCommand("sp_select", connection);
-            command.CommandType = CommandType.storedProcedure;
-            var DataTable = new DataTable();
-            var adapter = new SqlDataAdapter(cmd);
-            adapter.Fill(DataTable);
-
-            foreach(DataRow dr in DataTable.Rows)
-            {
-                ListForUserRegistration.Add(new UserRegistrationModel { 
-                    id = Convert.ToInt32(dr[0]),
-                    emailid = Convert.ToString(dr[1]),
-                    PasswordOfUser = Convert.ToString(dr[2]),
-                    NameOfUser = Convert.ToString(dr[3]),
-                });
-            }
-
-
-
-            return ListForUserRegistration;
-        }
+         
     }
 }
