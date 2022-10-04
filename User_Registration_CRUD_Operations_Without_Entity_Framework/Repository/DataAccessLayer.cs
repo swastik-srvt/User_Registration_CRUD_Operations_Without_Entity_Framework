@@ -12,42 +12,50 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
     public class DataAccessLayer
     {
         //connect with swapnil for reading connection string from appSettings.json
-        public SqlConnection connection = new SqlConnection("conString");
+//         public SqlConnection connection = new SqlConnection("TextMVCCOnnectionString");
 
+        private readonly IConfiguration _configuration;
+        private readonly string ConnectionString;
+         
+        public DataAcessLayer(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            ConnectionString = _configuration.GetConnectionString("TextMVCCOnnectionString")
+        }
         //use var 
         public List<UserRegistrationModel>  GetDataList()
         {
-            List<UserRegistrationModel> list_for_user_registration = new List<UserRegistrationModel>();
+            var ListForUserRegistration = new List<UserRegistrationModel>();
             var  command= new SqlCommand("sp_select", connection);
             command.CommandType = CommandType.storedProcedure;
-            var data_table = new DataTable();
+            var DataTable = new DataTable();
             var adapter = new SqlDataAdapter(cmd);
-            adapter.Fill(data_table);
+            adapter.Fill(DataTable);
 
-            foreach(DataRow dr in data_table.Rows)
+            foreach(DataRow dr in DataTable.Rows)
             {
-                list_for_user_registration.Add(new UserRegistrationModel { 
+                ListForUserRegistration.Add(new UserRegistrationModel { 
                     id = Convert.ToInt32(dr[0]),
                     emailid = Convert.ToString(dr[1]),
-                    password_of_user = Convert.ToString(dr[2]),
-                    name_of_user = Convert.ToString(dr[3]),
+                    PasswordOfUser = Convert.ToString(dr[2]),
+                    NameOfUser = Convert.ToString(dr[3]),
                 });
             }
 
 
 
-            return list_for_user_registration;
+            return ListForUserRegistration;
         }
 
         //it should be add data, also add, update should return back updated/added row from table
-        public bool InsertData(User_Registration_CRUD_Operations_Without_Entity_Framework user_registration)
+        public bool InsertData(User_Registration_CRUD_Operations_Without_Entity_Framework UserRegistration)
         {
             var command = new SqlCommand("sp_insert", connection);
             command.CommandType = CommandType.storedProcedure;
-            command.Parameters.AddWithValue("@id", user_registration.id);
-            command.Parameters.AddWithValue("@emailid", user_registration.emailid);
-            command.Parameters.AddWithValue("@password_of_user", user_registration.password_of_user);
-            command.Parameters.AddWithValue("@name_of_user", user_registration.name_of_user);
+            command.Parameters.AddWithValue("@id", UserRegistration.id);
+            command.Parameters.AddWithValue("@emailid", UserRegistration.EmailId);
+            command.Parameters.AddWithValue("@password_of_user", UserRegistration.PasswordOfUser);
+            command.Parameters.AddWithValue("@name_of_user", UserRegistration.NameOfUser);
             connection.open();
             i = cmd.ExecuteNonQuery();
             connection.close();
