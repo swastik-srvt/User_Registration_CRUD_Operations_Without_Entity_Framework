@@ -15,19 +15,21 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
     public class UserController : Controller
     {
         /*it is a very major mistake I am not expecting you do this. this should be inside constructor, Also use meaningful names for variables and use var rather than tight coupling */
-        DataAccessLayer dal = new DataAccessLayer();
+        val dal = new DataAccessLayer();
         // GET: UserController1
         public ActionResult Index()
         {
             ModelState.Clear();
             //first assign the value returned by GetDataList to some variable then return that variable, we might need to process data according to UI requirements
-            return View(dal.GetDataList());
+            var DataList =  View(dal.GetDataList());
+            return DataList;
         }
 
         // GET: UserController1/Details/5
         public ActionResult Details(int id)
         {
-            return View(dal.GetDataList().Find(user_registration = user_registration));
+            var  userRegistration = View(dal.GetDataList().Find(user_registration = user_registration)); 
+            return userRegistration;
         }
 
         // GET: UserController1/Create
