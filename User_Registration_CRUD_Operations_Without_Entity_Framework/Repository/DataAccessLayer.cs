@@ -53,13 +53,23 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
             int i;
             var command = new SqlCommand("sp_insert", connection);
             command.CommandType = CommandType.storedProcedure;
-            command.Parameters.AddWithValue("@id", UserRegistration.Id);
-            command.Parameters.AddWithValue("@emailid", UserRegistration.EmailId);
-            command.Parameters.AddWithValue("@password_of_user", UserRegistration.PasswordOfUser);
-            command.Parameters.AddWithValue("@name_of_user", UserRegistration.NameOfUser);
+            command.Parameters.AddWithValue("@Id", UserRegistration.Id);
+            command.Parameters.AddWithValue("@EmailId", UserRegistration.EmailId);
+            command.Parameters.AddWithValue("@PasswordOfUser", UserRegistration.PasswordOfUser);
+            command.Parameters.AddWithValue("@NameOfUser", UserRegistration.NameOfUser);
             connection.open();
+            
+             var NameOutputParameter = command.Parameters.Add("@NameOfUser", SqlDbType.VarChar,60);
+                    NameOutputParameter.Direction = ParameterDirection.Output;
+             var EmailIdOutputParameter = command.Parameters.Add("@EmailId", SqlDbType.VarChar,60);
+                    EmailOutputParameter.Direction = ParameterDirection.Output;
+            
             i = cmd.ExecuteNonQuery();
             connection.close();
+            addedUser.NameOfUser = (string)NameOutputParameter.Value;
+            addedUser.EmailId = (string)EmailIdOutputParameter.Value;
+            
+            
             if(i>=1)
                 {
                 return true;
@@ -78,8 +88,14 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
             command.CommandType = CommandType.storedProcedure;
             command.Parameters.AddWithValue("@id", UserRegistration.Id);
             command.open();
+            var NameOutputParameter = command.Parameters.Add("@NameOfUser", SqlDbType.VarChar,60);
+              NameOutputParameter.Direction = ParameterDirection.Output;
+             var EmailIdOutputParameter = command.Parameters.Add("@EmailId", SqlDbType.VarChar,60);
+               EmailOutputParameter.Direction = ParameterDirection.Output;
             i = command.ExecuteNonQuery();
             connection.close();
+            addedUser.NameOfUser = (string)NameOutputParameter.Value;
+            addedUser.EmailId = (string)EmailIdOutputParameter.Value;
             if(i>=1)
                 {
                 return true;
