@@ -3,5 +3,7 @@ namespace User_Registration_CRUD_Operation_Without_Entity_Framework.Models
   public interface IDataAcessLayer{
     public List<User> GetDataList();
     public User InsertData(UserRegistrationModel userRegistration);
+    public Usesr DeleteData(UserRegistrationMode userRegistration);
+    
   }
 }
