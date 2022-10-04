@@ -50,9 +50,10 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
         //it should be add data, also add, update should return back updated/added row from table
         public bool InsertData(User_Registration_CRUD_Operations_Without_Entity_Framework UserRegistration)
         {
+            int i;
             var command = new SqlCommand("sp_insert", connection);
             command.CommandType = CommandType.storedProcedure;
-            command.Parameters.AddWithValue("@id", UserRegistration.id);
+            command.Parameters.AddWithValue("@id", UserRegistration.Id);
             command.Parameters.AddWithValue("@emailid", UserRegistration.EmailId);
             command.Parameters.AddWithValue("@password_of_user", UserRegistration.PasswordOfUser);
             command.Parameters.AddWithValue("@name_of_user", UserRegistration.NameOfUser);
@@ -69,6 +70,25 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Repository
                 }
 
 
+        }
+        
+        public bool DeleteData(User_Registration_CRUD_Operations_Without_Entity_Framework UserRegistration){
+            int i ;
+            var command = new SqCommand("sp_delete", connection);
+            command.CommandType = CommandType.storedProcedure;
+            command.Parameters.AddWithValue("@id", UserRegistration.Id);
+            command.open();
+            i = command.ExecuteNonQuery();
+            connection.close();
+            if(i>=1)
+                {
+                return true;
+                }
+                else
+                {
+                    return false;    
+                }
+            
         }
         
          
