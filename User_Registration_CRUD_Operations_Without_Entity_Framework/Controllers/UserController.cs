@@ -15,7 +15,15 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
     public class UserController : Controller
     {
         /*it is a very major mistake I am not expecting you do this. this should be inside constructor, Also use meaningful names for variables and use var rather than tight coupling */
-        val dal = new DataAccessLayer();
+//         val dal = new DataAccessLayer();
+
+             private readonly IUserDataAccessLayer _dataLayerFunction;
+            
+            public UserController(IUserDataAccessLayer dataLayerFunction)
+        {
+            _dataLayerFunction = dataLayerFunction;
+        }
+            
         // GET: UserController1
         public ActionResult Index()
         {
@@ -28,7 +36,7 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         // GET: UserController1/Details/5
         public ActionResult Details(int id)
         {
-            var  userRegistration = View(dal.GetDataList().Find(user_registration = user_registration)); 
+            var  userRegistration = View(_dataLayerFunction.GetDataList().Find(userRegistration = userRegistration)); 
             return userRegistration;
         }
 
@@ -41,13 +49,13 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         // POST: UserController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserRegistrationModel user_registration)
+        public ActionResult Create(UserRegistrationModel userRegistration)
         {
             //you have use logger, yu should log the error message also for exception
             try
             {
                 //first check here if model state is valid
-                if(dal.InsertData(user_registration))
+                if(_dataLayerFunction.InsertData(userRegistration))
                 {
                     ViewBag.Message = "Data Saved";
                 }
