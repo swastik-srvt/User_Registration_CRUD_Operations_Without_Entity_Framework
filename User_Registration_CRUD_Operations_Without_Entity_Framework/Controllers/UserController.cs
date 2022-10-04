@@ -91,17 +91,20 @@ namespace User_Registration_CRUD_Operations_Without_Entity_Framework.Controllers
         // GET: UserController1/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_dataLayerFunction.GetDataList().Find(userRegistration => userRegistration.Id  = id))
         }
 
         // POST: UserController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, UserRegistrationModel userRegistration)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if(_dataLayerFunction.DeleteData(userRegistration))
+                {
+                    ViewBag.Message("Data Deleted")
+                }
             }
             catch
             {
